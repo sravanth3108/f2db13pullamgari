@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1 EXPRESS
+  p Sravanth Kumar Reddy Pullamgari
+  button(class="btn btn-success" onclick='doBump()') Press Me
+  div#bump Bump the count 
+  script.
+      var count=0;
+      var bump=1;
+      function doBump(){
+      count=count+bump;
+      bump=bump+1;
+      print=document.getElementById("bump");
+      print.innerHTML='Count '+count+' with bump '+bump;}
+
