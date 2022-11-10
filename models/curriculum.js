@@ -4,5 +4,4 @@ const curriculumSchema = mongoose.Schema({
      department:String,
     credits:Number,
 })
-module.exports = mongoose.model("Curriculum",
-curriculumSchema)
+module.exports = mongoose.model("Curriculum",curriculumSchema)

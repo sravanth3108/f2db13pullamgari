@@ -1,9 +1,6 @@
 var express = require('express');
+const curriculum_controlers= require('../controllers/curriculum');
 var router = express.Router();
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('curriculum', { title: 'Search Results' });
-});
-
+/* GET curriculums */
+router.get('/', curriculum_controlers.curriculum_view_all_Page );
 module.exports = router;
