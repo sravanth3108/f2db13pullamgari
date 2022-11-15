@@ -1,0 +1,36 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  form(id='curriculumForm', action="/resource/curriculum", method="POST") 
+    div.form-group 
+        label.curriculumAttr(for='courseName') Course Name 
+        input#courseName(type='text', name='courseName') 
+    div.form-group 
+        label.curriculumAttr(for='department') Department 
+        input#department(type='text', name='department') 
+    div.form-group 
+        label.curriculumAttr(for='credits') credits
+        input#credits(type='number', name='credits') 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['curriculumForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'POST', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        console.log(resp);
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Save succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Save failed " + error ) 
+      }); 
+    }); 
+ 

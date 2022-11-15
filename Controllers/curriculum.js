@@ -14,12 +14,20 @@ exports.curriculum_list = async function(req, res) {
 
  
 // for a specific curriculum. 
-exports.curriculum_detail = function(req, res) { 
-    res.send('NOT IMPLEMENTED: curriculum detail: ' + req.params.id); 
+// for a specific curriculum. 
+exports.curriculum_detail = async function(req, res) { 
+    console.log("detail"  + req.params.id) 
+    try { 
+        result = await curriculum.findById( req.params.id) 
+        res.send(result) 
+    } catch (error) { 
+        res.status(500) 
+        res.send(`{"error": document for id ${req.params.id} not found`); 
+    } 
 }; 
- 
+  
 // Handle curriculum create on POST.
-// Handle Costume create on POST. 
+// Handle curriculum create on POST. 
 exports.curriculum_create_post = function(req, res) { 
     
     console.log(req.body) ;
@@ -27,13 +35,13 @@ exports.curriculum_create_post = function(req, res) {
     // We are looking for a body, since POST does not have query parameters. 
     // Even though bodies can be in many different formats, we will be picky 
     // and require that it be a json object 
-    // {"costume_type":"goat", "cost":12, "size":"large"} 
+    // {"curriculum_type":"goat", "cost":12, "size":"large"} 
    // document.courseName = req.body.courseName; 
     //document.department = req.body.department; 
     //document.credits = req.body.credits; 
-    document.costume_type = req.body.costume_type; 
-    document.cost = req.body.cost; 
-    document.size = req.body.size; 
+    document.courseName = req.body.courseName; 
+    document.department = req.body.department; 
+    document.credits = req.body.credits; 
     try{ 
         let result = document.save(); 
         res.send(result); 
@@ -45,8 +53,16 @@ exports.curriculum_create_post = function(req, res) {
 }; 
  
 // Handle curriculum delete form on DELETE. 
-exports.curriculum_delete = function(req, res) { 
-    res.send('NOT IMPLEMENTED: curriculum delete DELETE ' + req.params.id); 
+exports.curriculum_delete = async function(req, res) { 
+    console.log("delete "  + req.params.id) 
+    try { 
+        result = await curriculum.findByIdAndDelete( req.params.id) 
+        console.log("Removed " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": Error deleting ${err}}`); 
+    } 
 }; 
  
 // Handle curriculum update form on PUT. 
@@ -66,3 +82,32 @@ exports.curriculum_view_all_Page = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
 };
+
+ 
+ // Handle a show one view with id specified by query 
+ exports.curriculum_view_one_Page = async function(req, res) { 
+    console.log("single view for id "  + req.query.id) 
+    try{ 
+        result = await curriculum.findById( req.query.id) 
+        res.render('curriculumdetail',  { title: 'Curriculum Detail', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+// Handle building the view for creating a curriculum. 
+// No body, no in path parameter, no query. 
+// Does not need to be async 
+exports.curriculum_create_Page =  function(req, res) { 
+    console.log("create view") 
+    try{ 
+        res.render('curriculumcreate', { title: 'curriculum Create'}); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+ 
+
