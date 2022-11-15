@@ -109,5 +109,18 @@ exports.curriculum_create_Page =  function(req, res) {
         res.send(`{'error': '${err}'}`); 
     } 
 }; 
+//Handle building the view for updating a curriculum. 
+// query provides the id 
+exports.curriculum_update_Page =  async function(req, res) { 
+    console.log("update view for item "+req.query.id) 
+    try{ 
+        let result = await curriculum.findById(req.query.id) 
+        res.render('curriculumupdate', { title: 'curriculum Update', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
  
 
