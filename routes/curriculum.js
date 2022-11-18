@@ -9,4 +9,6 @@ router.get('/detail/', curriculum_controlers.curriculum_view_one_Page);
 router.get('/create', curriculum_controlers.curriculum_create_Page); 
 /* GET create update page */ 
 router.get('/update', curriculum_controlers.curriculum_update_Page); 
+/* GET delete curriculum page */ 
+router.get('/delete', curriculum_controlers.curriculum_delete_Page); 
 module.exports = router;

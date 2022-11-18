@@ -2,12 +2,14 @@ extends layout
  
 block content 
   h1= title 
- 
-  - let curriculumid = toShow._id
-  - let courseName = toShow.courseName 
-  - let department = toShow.department 
-  - let credits = toShow.credits 
-  div 
+  if (toShow == null) 
+    h2 No instance to Show. Please enter the correct ID.
+  else
+   - let curriculumid = toShow._id
+   - let courseName = toShow.courseName 
+   - let department = toShow.department 
+   - let credits = toShow.credits 
+   div 
     div.row 
       div(class='curriculumAttr mr-3') curriculum ID is: 
       div #{curriculumid}

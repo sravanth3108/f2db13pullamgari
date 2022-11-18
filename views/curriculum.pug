@@ -4,13 +4,19 @@ block content
   h1 Search results Curriculum 
   -  var results = results;
   div.container-fluid
-    div.row
+    div(class="row m-1")
       each value,index in results 
-        div.col-sm-2(onclick=`buy(${index})`) CourseName: #{value["courseName"]}  <hr>  Department: #{value["department"]} <hr> Credits: #{value["credits"]}
+        - let destination = `dispatch(\"/curriculum/update?id=${value._id}\")` 
+        div.col-sm-3(onclick=`buy(${index})`) CourseName: #{value["courseName"]} <br>  Department: #{value["department"]}   <br>    Credits: #{value["credits"]}
+        button.btn( class="btn-primary ml-1", onclick= destination) Update 
+
   script.
       function buy(index){
-         alert("you purchased item "+(index+1))
-      }         
+         alert("you purchased item "+(index+1))  
+      }      
+      function dispatch(path){ 
+      window.location.href=path      
+      }    
   
    
 

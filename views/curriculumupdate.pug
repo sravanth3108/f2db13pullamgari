@@ -2,29 +2,30 @@ extends layout
  
 block content 
   h1= title 
- 
-  - let curriculumid = toShow._id 
-  - let courseName = toShow.courseName 
-  - let department = toShow.department 
-  - let credits = toShow.credits 
+  if (toShow == null) 
+    h2 No instance to update. Please enter the correct ID 
+  else
+   - let curriculumid = toShow._id 
+   - let courseName = toShow.courseName 
+   - let department = toShow.department 
+   - let credits = toShow.credits 
    
-  div.row(class='mb-2') 
-    div.mr-1 ID is 
-    div #{curriculumid} 
-  - let actionid = "/resource/curriculum/" + curriculumid 
-  form(id='curriculumForm', action= actionid, method="PUT") 
-    div.form-group 
+   
+   form(id='curriculumForm', action= "/resource/curriculum/" + curriculumid , method="PUT") 
+    div.row(class='mb-2')            ID is #{curriculumid} 
+    div(class=mb1)
+      div.form-group 
         label.curriculumAttr(for='courseName') Course Name
         input#courseName(type='text', name='courseName', value= courseName ) 
-    div.form-group 
+      div.form-group 
         label.curriculumAttr(for='department') Department 
         input#Department(type='text', name='department', value= department ) 
-    div.form-group 
+      div.form-group 
         label.curriculumAttr(for='credits') Credits 
         input#credits(type='number', name='credits', value= credits ) 
-    input(type="submit") 
+    input(type="submit" class ="btn btn-success" style="position:relative,align:center") 
  
-  script. 
+   script. 
     document.forms['curriculumForm'].addEventListener('submit', (event) => { 
       event.preventDefault(); 
       // TODO do something here to show user that form is being submitted 
