@@ -1,16 +1,12 @@
-extends layout
-
-block content
-  h1 EXPRESS
-  p Sravanth Kumar Reddy Pullamgari
-  button(class="btn btn-success" onclick='doBump()') Press Me
-  div#bump Bump the count 
-  script.
-      var count=0;
-      var bump=1;
-      function doBump(){
-      count=count+bump;
-      bump=bump+1;
-      print=document.getElementById("bump");
-      print.innerHTML='Count '+count+' with bump '+bump;}
-
+extends layout 
+ 
+block content 
+  if (!user) 
+    a(href="/login") Login 
+    br 
+    a(href="/register") Register 
+  if (user) 
+    p You are currently logged in as #{user.username} 
+    a(href="/curriculum") Take me to Curriculum 
+    br 
+    a(href="/logout") Logout 

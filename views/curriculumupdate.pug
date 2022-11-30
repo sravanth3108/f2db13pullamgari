@@ -16,13 +16,13 @@ block content
     div(class=mb1)
       div.form-group 
         label.curriculumAttr(for='courseName') Course Name
-        input#courseName(type='text', name='courseName', value= courseName ) 
+        input#courseName(type='text', name='courseName', value= courseName, required ) 
       div.form-group 
         label.curriculumAttr(for='department') Department 
-        input#Department(type='text', name='department', value= department ) 
+        input#Department(type='text', name='department', value= department,required ) 
       div.form-group 
         label.curriculumAttr(for='credits') Credits 
-        input#credits(type='number', name='credits', value= credits ) 
+        input#credits(type='number', name='credits', value= credits,required ) 
     input(type="submit" class ="btn btn-success" style="position:relative,align:center") 
  
    script. 

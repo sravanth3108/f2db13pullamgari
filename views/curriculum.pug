@@ -3,13 +3,17 @@ extends layout
 block content
   h1 Search results Curriculum 
   -  var results = results;
+  button.btn( class="btn-primary ml-1", onclick= `dispatch(\"/curriculum/create")`) Create 
   div.container-fluid
     div(class="row m-1")
       each value,index in results 
         - let destination = `dispatch(\"/curriculum/update?id=${value._id}\")` 
+        - let destination2 = `dispatch(\"/curriculum/detail?id=${value._id}\")` 
+        - let destination3 = `dispatch(\"/curriculum/delete?id=${value._id}\")` 
         div.col-sm-3(onclick=`buy(${index})`) CourseName: #{value["courseName"]} <br>  Department: #{value["department"]}   <br>    Credits: #{value["credits"]}
         button.btn( class="btn-primary ml-1", onclick= destination) Update 
-
+        button.btn( class="btn-success ml-1", onclick= destination2) Detail 
+        button.btn( class="btn-danger ml-1", onclick= destination3) Delete 
   script.
       function buy(index){
          alert("you purchased item "+(index+1))  
